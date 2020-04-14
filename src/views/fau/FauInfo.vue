@@ -3,14 +3,14 @@
     <div class="filter-container">
       <!-- ID -->
       <el-input v-model="listQuery.id" placeholder="ID" style="width: 100px;" class="filter-item"
-                @keyup.enter.native="initFaults('query')"/>
+                @keyup.enter.native="queryFaults"/>
       <!-- 重要性 -->
       <el-select v-model="listQuery.importance" placeholder="故障程度" clearable style="width: 110px" class="filter-item">
         <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item"/>
       </el-select>
       <!-- aid -->
       <el-input v-model="listQuery.aid" placeholder="维修人员ID" style="width: 105px;" class="filter-item"
-                @keyup.enter.native="initFaults('query')"/>
+                @keyup.enter.native="queryFaults"/>
       <!-- 类型框 -->
       <el-select v-model="listQuery.type" placeholder="故障类型" clearable class="filter-item" style="width: 135px">
         <el-option v-for="item in eventOptions" :key="item.key" :label="item.key" :value="item.key"/>
@@ -20,7 +20,7 @@
         <el-option v-for="item in stateOptions" :key="item.value" :label="item.key" :value="item.value"/>
       </el-select>
       <!-- 时间范围 -->
-<!--      入职日期：-->
+      <!--      入职日期：-->
       <el-date-picker v-model="listQuery.dateScope"
                       type="daterange"
                       sizi="mini"
@@ -28,77 +28,82 @@
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
                       unlink-panels
+                      class="filter-item"
                       value-format="yyyy-MM-dd"/>
 
       <!-- 搜索按钮 -->
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="initFaults('query')">
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="queryFaults">
         搜索
       </el-button>
     </div>
 
-    <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="faultDate"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%"
-    >
-      <!-- 序号! -->
-      <el-table-column label="ID" prop="id" align="center" width="80">
-        <!--获得该行的数据-->
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
-      <!-- 时间! -->
-      <el-table-column label="故障时间" prop="datetime" width="200" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.date}}</span>
-        </template>
-      </el-table-column>
-      <!-- 类型！ -->
-      <el-table-column label="故障类型" prop="type" min-width="150" align="center">
-        <!--<template slot-scope="{row}">
-          <span v-if="row.status !== 'unDistribution' " class="link-type"">{{ row.type }}</span>
-          <span v-else @click="handleNoWO">{{ row.type }}</span>
-        </template>-->
-      </el-table-column>
-      <!-- 位置! -->
-      <el-table-column label="位置" prop="address" width="300" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.address }}</span>
-        </template>
-      </el-table-column>
-      <!-- 时限! -->
-      <el-table-column label="时限" prop="limitTime" width="110" align="center">
-        <template slot-scope="scope">
-          <span>{{4-scope.row.importance}} 天</span>
-        </template>
-      </el-table-column>
 
-      <el-table-column label="故障程度" prop="importance" width="80px">
-      </el-table-column>
-      <!-- 维修人员！ -->
-      <el-table-column label="维修人员" prop="account.name" align="center" width="200">
-        <template slot-scope="{row}">
-          <span v-if="row.status !== 'unDistribution'" class="link-type" @click="handleFetchRM(row.account)">{{ row.account.name }}</span>
-          <span v-else style="color: red">{{row.status | statusFilter}}</span>
-        </template>
-      </el-table-column>
-      <!-- 状态! -->
-      <el-table-column label="状态" prop="status" class-name="status-col" width="200">
-        <template slot-scope="{row}">
-          <el-tag size="medium">
-            {{ row.status | statusFilter}}
-          </el-tag>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div style="margin-top: 10px">
+      <el-table
+        :key="tableKey"
+        v-loading="listLoading"
+        :data="faultDate"
+        border
+        stripe
+        fit
+        highlight-current-row
+        style="width: 100%"
+      >
+        <!-- 序号! -->
+        <el-table-column label="ID" prop="id" align="center" width="80">
+          <!--获得该行的数据-->
+          <template slot-scope="scope">
+            <span>{{ scope.row.id }}</span>
+          </template>
+        </el-table-column>
+        <!-- 时间! -->
+        <el-table-column label="故障时间" prop="datetime" width="200" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.date}}</span>
+          </template>
+        </el-table-column>
+        <!-- 类型！ -->
+        <el-table-column label="故障类型" prop="type" min-width="150" align="center">
+          <!--<template slot-scope="{row}">
+            <span v-if="row.status !== 'unDistribution' " class="link-type"">{{ row.type }}</span>
+            <span v-else @click="handleNoWO">{{ row.type }}</span>
+          </template>-->
+        </el-table-column>
+        <!-- 位置! -->
+        <el-table-column label="位置" prop="address" width="300" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.address }}</span>
+          </template>
+        </el-table-column>
+        <!-- 时限! -->
+        <el-table-column label="时限" prop="limitTime" width="110" align="center">
+          <template slot-scope="scope">
+            <span>{{4-scope.row.importance}} 天</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="故障程度" prop="importance" width="80px">
+        </el-table-column>
+        <!-- 维修人员！ -->
+        <el-table-column label="维修人员" prop="account.name" align="center" width="200">
+          <template slot-scope="{row}">
+            <span v-if="row.status !== 'unDistribution'" class="link-type" @click="handleFetchRM(row.account)">{{ row.account.name }}</span>
+            <span v-else style="color: red">{{row.status | statusFilter}}</span>
+          </template>
+        </el-table-column>
+        <!-- 状态! -->
+        <el-table-column label="状态" prop="status" class-name="status-col" width="200">
+          <template slot-scope="{row}">
+            <el-tag size="medium">
+              {{ row.status | statusFilter}}
+            </el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
 
     <!--     分页管理-->
-    <div style="display: flex;justify-content: flex-end">
+    <div style="display: flex;justify-content: flex-end;margin-top: 10px">
       <el-pagination background
                      @current-change="currentChange"
                      @size-change="sizeChange"
@@ -140,58 +145,58 @@
         <el-button type="primary" @click="dialogMTVisible = false">确定</el-button>
       </span>
     </el-dialog>
-<!--        点击故障类型，弹出该故障对应的工单 先不写工单-->
-        <!--<el-dialog :visible.sync="dialogWOVisible" title="工单">
-          <table>
-            <tr>
-              <td class="td_left">工单编号</td>
-              <td class="td_right">{{workOrder.id}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">故障时间</td>
-              <td class="td_right">{{workOrder.eDate}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">维修期限</td>
-              <td class="td_right">{{workOrder.eLimitTime}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">故障类型</td>
-              <td class="td_right">{{workOrder.eType}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">故障地点</td>
-              <td class="td_right">{{workOrder.eAddress}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">维修人员工号</td>
-              <td class="td_right">{{workOrder.uid}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">维修人员</td>
-              <td class="td_right">{{workOrder.uName}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">维修人员手机号</td>
-              <td class="td_right">{{workOrder.uPhoneNumber}}</td>
-            </tr>
-            <tr>
-              <td class="td_left">维修完成时间</td>
-              <td class="td_right">{{workOrder.eDate}}</td>
-            </tr>
-            <tr v-if="workOrder.status === '已完成'">
-              <td class="td_left">维修情况</td>
-              <td class="td_right">{{workOrder.remarks}}</td>
-            </tr>
-            <tr v-if="workOrder.status === '已完成'">
-              <td class="td_left">物资消耗</td>
-              <td class="td_right">{{workOrder.goods}}</td>
-            </tr>
-          </table>
-          <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="dialogWOVisible = false">确定</el-button>
-          </span>
-        </el-dialog>-->
+    <!--        点击故障类型，弹出该故障对应的工单 先不写工单-->
+    <!--<el-dialog :visible.sync="dialogWOVisible" title="工单">
+      <table>
+        <tr>
+          <td class="td_left">工单编号</td>
+          <td class="td_right">{{workOrder.id}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">故障时间</td>
+          <td class="td_right">{{workOrder.eDate}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">维修期限</td>
+          <td class="td_right">{{workOrder.eLimitTime}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">故障类型</td>
+          <td class="td_right">{{workOrder.eType}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">故障地点</td>
+          <td class="td_right">{{workOrder.eAddress}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">维修人员工号</td>
+          <td class="td_right">{{workOrder.uid}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">维修人员</td>
+          <td class="td_right">{{workOrder.uName}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">维修人员手机号</td>
+          <td class="td_right">{{workOrder.uPhoneNumber}}</td>
+        </tr>
+        <tr>
+          <td class="td_left">维修完成时间</td>
+          <td class="td_right">{{workOrder.eDate}}</td>
+        </tr>
+        <tr v-if="workOrder.status === '已完成'">
+          <td class="td_left">维修情况</td>
+          <td class="td_right">{{workOrder.remarks}}</td>
+        </tr>
+        <tr v-if="workOrder.status === '已完成'">
+          <td class="td_left">物资消耗</td>
+          <td class="td_right">{{workOrder.goods}}</td>
+        </tr>
+      </table>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogWOVisible = false">确定</el-button>
+      </span>
+    </el-dialog>-->
   </div>
 </template>
 
@@ -208,16 +213,16 @@
   ]
 
   const stateOptions = [
-    {value: 'unDistribution',key: '未分配'},
-    {value: 'ready',key: '分配中'},
-    {value: 'fixing',key: '维修中'},
-    {value: 'finished',key: '已完成'}
+    {value: 'unDistribution', key: '未分配'},
+    {value: 'ready', key: '分配中'},
+    {value: 'fixing', key: '维修中'},
+    {value: 'finished', key: '已完成'}
   ]
 
   export default {
     name: 'ComplexTable',
     filters: {
-      statusFilter: function(value) {
+      statusFilter: function (value) {
         const statusMap = {
           'fixing': '已分配',
           'finished': '已完成',
@@ -276,31 +281,37 @@
       // 跳页
       currentChange(currentPage) {
         this.page = currentPage;
-        this.initFaults();
+        this.initFaults('query');
       },
       sizeChange(currentSize) {
         this.size = currentSize;
-        this.initFaults();
+        this.initFaults('query');
+      },
+      // 点击搜索时从第一页显示
+      queryFaults(){
+        this.page = 1;
+        this.initFaults('query');
       },
       initFaults(type) {
+        console.log(this.listQuery);
         let url = "/fault/info/?page=" + this.page + "&size=" + this.size;
         if (type && type == 'query') {
-          if (this.listQuery.id){
+          if (this.listQuery.id) {
             url += "&id=" + this.listQuery.id;
           }
-          if (this.listQuery.type){
+          if (this.listQuery.type) {
             url += "&type=" + this.listQuery.type;
           }
-          if (this.listQuery.aId){
+          if (this.listQuery.aId) {
             url += "&aId=" + this.listQuery.aId;
           }
-          if (this.listQuery.importance){
+          if (this.listQuery.importance) {
             url += "&importance=" + this.listQuery.importance;
           }
-          if (this.listQuery.status){
+          if (this.listQuery.status) {
             url += "&status=" + this.listQuery.status;
           }
-          if (this.listQuery.dateScope){
+          if (this.listQuery.dateScope) {
             url += "&dateScope=" + this.listQuery.dateScope;
           }
         }
@@ -347,6 +358,16 @@
 </script>
 
 <style scoped>
+
+  .filter-container {
+    display: flex;
+    justify-items: center;
+  }
+
+  .filter-item {
+    margin-right: 2px;
+  }
+
   .td_left {
     width: 150px;
     text-align: right;
@@ -358,6 +379,18 @@
   .td_right {
     padding-left: 50px;
     font-size: 17px;
+  }
+
+  .link-type,
+  .link-type:focus {
+    color: #337ab7;
+    cursor: pointer;
+
+  &
+  :hover {
+    color: rgb(32, 160, 255);
+  }
+
   }
 </style>
 

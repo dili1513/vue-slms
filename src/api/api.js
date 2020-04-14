@@ -52,7 +52,7 @@ export const postKeyValueRequest = (url, params) => {
 export const postRequest = (url, params) => {
   return axios({
     method: 'post',
-    url: `${base}${rul}`,
+    url: `${base}${url}`,
     data: params
   })
 }

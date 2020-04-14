@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <el-container>
+  <div class="homeBox">
+    <el-container >
       <el-aside width="200px">
         <el-menu unique-opened router>
-          <el-menu-item index="/home">
+          <el-menu-item index="/home" >
             <i class="el-icon-s-home"></i>
             <span>首页</span>
           </el-menu-item>
@@ -21,7 +21,7 @@
       </el-aside>
       <el-container>
         <el-header class="homeHeader">
-          <div @click="toHome" class="headerText">路灯管理系统</div>
+          <div @click="toHome" class="title">路灯管理系统</div>
           <div>
             <el-dropdown class="accountInfo" @command="commandHandler">
             <span class="el-dropdown-link">
@@ -87,12 +87,15 @@
 </script>
 
 <style>
-  .headerText{
+
+  .homeHeader .title {
+    font-size: 30px;
+    font-family: 华文行楷;
     cursor: pointer;
   }
 
   .homeHeader {
-    background-color: #aa3dff;
+    background-color: #eab5e9;
     display: flex;
     /*div对齐方式,顶部，底部，中间*/
     align-items: center;
