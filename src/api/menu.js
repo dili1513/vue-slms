@@ -44,6 +44,8 @@ export const formatRoutes = (routes) => {
           require(['../views/account/' + component + '.vue'], resolve);
         } else if(component.startsWith('War')){
           require(['../views/warehouse/' + component + '.vue'], resolve);
+        } else if(component.startsWith('Con')){
+          require(['../views/construction/' + component + '.vue'], resolve);
         }
       }
     }
