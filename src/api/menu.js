@@ -35,12 +35,15 @@ export const formatRoutes = (routes) => {
       children: children,
       iconCls: iconCls,
       component(resolve) {
+        console.log(component);
         if (component.startsWith('Home')) {
           require(['../views/' + component + '.vue'], resolve);
         } else if (component.startsWith('Fau')) {
           require(['../views/fau/' + component + '.vue'], resolve);
         } else if (component.startsWith('Acc')) {
           require(['../views/account/' + component + '.vue'], resolve);
+        } else if(component.startsWith('War')){
+          require(['../views/warehouse/' + component + '.vue'], resolve);
         }
       }
     }
