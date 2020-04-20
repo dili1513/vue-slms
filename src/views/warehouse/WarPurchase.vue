@@ -7,6 +7,7 @@
                 <el-step title="物品入库"></el-step>
             </el-steps>
             <purchase-component
+                    ref="putPurchase"
                     v-show="showStatus[0]"
                     v-model="productParam"
                     :is-edit="isEdit"
@@ -61,6 +62,7 @@
                 }
             },
             prevStep() {
+                this.$refs.putPurchase.initForm();
                 if (this.active > 0 && this.active < this.showStatus.length) {
                     this.active--;
                     this.hideAll();
@@ -72,6 +74,7 @@
                 if (this.active < this.showStatus.length - 1) {
                     this.$refs.purchaseFinish.initList();
                     if(this.active == 1) {
+                        this.$refs.storeIn.initForm();
                         this.$refs.storeIn.initList();
                     }
                     this.active++;
@@ -85,6 +88,7 @@
             //     this.purchaseLists = childValue;
             // },
             finishCommit() {
+                this.$refs.putPurchase.initForm();
                 this.active = 0;
                 this.hideAll();
                 this.showStatus[this.active] = true;

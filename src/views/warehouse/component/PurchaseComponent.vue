@@ -61,6 +61,9 @@
             }
         },
         methods:{
+            initForm(){
+              this.value = {};
+            },
             toPurchaseFinish(){
                 this.$emit('nextStep');
             },
