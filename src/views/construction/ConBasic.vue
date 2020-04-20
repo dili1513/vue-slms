@@ -1,3 +1,9 @@
+<style>
+    .el-form {
+        white-space: pre-line;
+    }
+</style>
+
 <template>
   <div class="app-container">
     <div class="filter-container">
@@ -6,7 +12,7 @@
         <el-option v-if='item' v-for="item in projectList" :key="item.key" :value="item.id" :label="item.name" >{{ item.name }}
         </el-option>
       </el-select>
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-edit" @click="downloadAccont">
+      <el-button v-waves class="filter-item" style="margin-left: 10px" type="primary" icon="el-icon-edit" @click="downloadAccont">
         下载工单
       </el-button>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-edit" @click="downloadBook">
@@ -32,7 +38,7 @@
             border
             fit
             highlight-current-row
-            style="width: 100%;"
+            style="width: 100%;margin-top: 10px"
     >
       <el-table-column label="编号" prop="id" sortable="custom" align="center" width="80">
         <template slot-scope="scope">

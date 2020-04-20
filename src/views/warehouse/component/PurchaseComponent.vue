@@ -1,6 +1,6 @@
 <template>
     <div style="margin-top: 20px">
-        <el-form :model="value" :rules="rules" ref="purchaseComponent" label-width="120px" style="width: 600px" size="small">
+        <el-form :model="value" :rules="rules" ref="purchaseComponent" label-width="120px" style="width: 600px;margin-left: 100px" size="small">
             <el-form-item label="商品分类：" prop="goods">
                 <el-select v-model="value.goods" placeholder="请选择物品种类">
                     <el-option label="灯泡" value="灯泡"></el-option>
@@ -45,6 +45,7 @@
                         placeholder="请输入内容"></el-input>
             </el-form-item>
             <el-form-item style="text-align: center">
+                <el-button type="primary" size="medium" @click="toPurchaseFinish" >下一步，查看待采购列表</el-button>
                 <el-button type="primary" size="medium" @click="handleNext('productInfoForm')">下一步，等待采购</el-button>
             </el-form-item>
         </el-form>
@@ -60,6 +61,12 @@
             }
         },
         methods:{
+            initForm(){
+              this.value = {};
+            },
+            toPurchaseFinish(){
+                this.$emit('nextStep');
+            },
             handleNext(){
                 this.postRequest("/warehouse/purchase/",this.value).then(resp=>{
                     if(resp){
