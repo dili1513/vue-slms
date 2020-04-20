@@ -378,7 +378,7 @@
         this.temp = {
           project: undefined,
           id: undefined,
-          timestamp: new Date(),
+          date: new Date(),
           detail: ''
         }
       },
@@ -409,7 +409,6 @@
 
           let url = "/construction/getBill?id="+this.planQuery.pid;
           _this.getRequest(url).then(response => {
-              console.log(response)
 
               _this.form.id = response.id
               _this.form.accountId = _this.projectQuery.accountid
@@ -472,12 +471,12 @@
         })
 
         // //////////////////////////////////////////
-        this.$message({
+       /* this.$message({
           title: 'Success',
           message: '下载工单',
           type: 'success',
           duration: 2000
-        })
+        })*/
       },
       // 下载数据库里的文件
       downloadBook() {
@@ -586,12 +585,12 @@
 
 
 
-              this.$notify({
+             /* this.$notify({
                 title: 'Success',
                 message: resp,
                 type: 'success',
                 duration: 2000
-              })
+              })*/
             })
             this.dialogFormVisible2 = false
             this.getProject()

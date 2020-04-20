@@ -210,6 +210,7 @@
                                 })
                             })
                             this.dialogFormVisible1 = false
+                            this.getGoodsList()
                         }
                     })
                 },
