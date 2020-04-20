@@ -95,7 +95,7 @@
 
 <style scoped>
     .form-container {
-        width: 800px;
+        width: 1000px;
         margin-top: 40px;
         margin-left: 120px;
         margin-right: 120px;

@@ -1,12 +1,7 @@
 <template>
     <div style="margin-top: 20px">
-        <el-form :model="value" label-width="120px" style="width: 600px" size="small">
-            <el-button @click="initList" type="primary">测试</el-button>
+        <el-form :model="value" label-width="120px" style="width: 600px;margin-left: 100px" size="small">
             <el-form-item label="商品分类：" prop="goods">
-<!--                <el-select v-model="value.goods" placeholder="请选择物品种类">-->
-<!--                    <el-option label="灯杆" value="pole"></el-option>-->
-<!--                    <el-option label="灯泡" value="light"></el-option>-->
-<!--                </el-select>-->
                 <el-input v-model="value.goods"></el-input>
             </el-form-item>
             <el-form-item label="物品型号：" prop="type">

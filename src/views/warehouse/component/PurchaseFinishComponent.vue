@@ -70,7 +70,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <div style="margin-top: 50px;margin-left: 100px">
+        <div style="margin-top: 40px;margin-left: 150px">
             <el-button size="medium" @click="handlePrev">上一步，填写商品信息</el-button>
             <el-button type="primary" size="medium" @click="handleNext" style="margin-left: 100px">下一步，采购完成物品入库</el-button>
         </div>

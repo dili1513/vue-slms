@@ -1,6 +1,6 @@
 <template>
     <div style="margin-top: 20px">
-        <el-form :model="value" :rules="rules" ref="purchaseComponent" label-width="120px" style="width: 600px" size="small">
+        <el-form :model="value" :rules="rules" ref="purchaseComponent" label-width="120px" style="width: 600px;margin-left: 100px" size="small">
             <el-form-item label="商品分类：" prop="goods">
                 <el-select v-model="value.goods" placeholder="请选择物品种类">
                     <el-option label="灯泡" value="灯泡"></el-option>
