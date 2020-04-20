@@ -45,7 +45,7 @@
                         placeholder="请输入内容"></el-input>
             </el-form-item>
             <el-form-item style="text-align: center">
-                <el-button type="primary" size="medium" @click="toPurchaseFinish">下一步，查看待采购列表</el-button>
+                <el-button type="primary" size="medium" @click="toPurchaseFinish" >下一步，查看待采购列表</el-button>
                 <el-button type="primary" size="medium" @click="handleNext('productInfoForm')">下一步，等待采购</el-button>
             </el-form-item>
         </el-form>

@@ -48,9 +48,9 @@
         },
         data(){
             return {
-                active:1,
+                active:0,
                 productParam: '',
-                showStatus: [false, true, false],
+                showStatus: [true, false, false],
                 isEdit:true
             }
         },
