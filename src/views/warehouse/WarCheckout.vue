@@ -8,7 +8,7 @@
                     border
                     fit
                     highlight-current-row
-                    style="width: 70%"
+                    style="width: 75%"
                     @selection-change="handleSelectionChange"
             >
                 <el-table-column label="物资申请列表" align="center">
@@ -16,7 +16,7 @@
                     <el-table-column prop="applyId" label="申请人工号" width="100" />
                     <el-table-column prop="applyType" label="申请人员类型" width="120" />
                     <el-table-column prop="applyName" label="申请人姓名" width="120" />
-                    <el-table-column prop="applyTelephone" label="申请人手机号" width="120" />
+                    <el-table-column prop="applyTelephone" label="申请人联系方式" width="120" />
                     <el-table-column prop="applyStatus" label="状态" width="100">
                         <template slot-scope="{row}">
                             <el-tag :type="row.applyStatus == '待审核'? 'info':'success'">
@@ -24,7 +24,7 @@
                             </el-tag>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="detail" label="申请物资详细" width="180" />
+                    <el-table-column prop="detail" label="申请物资详细" width="240" />
                     <el-table-column label="操作" align="center" fixed="right" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
 <!--                            <el-button size="small" @click="showDetail(scope.row)">-->

@@ -14,5 +14,14 @@ module.exports = {
         host: 'localhost',
         port: 8080,
         proxy: proxyObj
+    },
+    configureWebpack: {
+        // provide the app's title in webpack's name field, so that
+        // it can be accessed in index.html to inject the correct title.
+
+        externals: {
+            'AMap': 'AMap',
+            'AMapUI': 'AMapUI'
+        }
     }
 }

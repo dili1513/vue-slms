@@ -31,7 +31,7 @@
                     width="100">
             </el-table-column>
             <el-table-column
-                    prop="manufacture"
+                    prop="manufacturer"
                     label="厂商"
                     width="120">
             </el-table-column>
@@ -62,6 +62,17 @@
                 </template>
             </el-table-column>
             <el-table-column
+                    prop="isStore"
+                    fixed="right"
+                    label="是否入库"
+                    width="120">
+                <template slot-scope="{row}">
+                    <el-tag :type="row.isStore == 0? 'info':'success'">
+                        {{ row.isStore == 0? '未入库':'已入库' }}
+                    </el-tag>
+                </template>
+            </el-table-column>
+            <el-table-column
                     fixed="right"
                     label="操作"
                     width="100">
@@ -70,7 +81,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <div style="margin-top: 50px;margin-left: 100px">
+        <div style="margin-top: 40px;margin-left: 150px">
             <el-button size="medium" @click="handlePrev">上一步，填写商品信息</el-button>
             <el-button type="primary" size="medium" @click="handleNext" style="margin-left: 100px">下一步，采购完成物品入库</el-button>
         </div>
@@ -123,12 +134,6 @@
                 }else if(data.isFinish === 1){
                     this.$alert('当前采购任务已经完成', '提示', {
                         confirmButtonText: '确定',
-                        // callback: action => {
-                        //     this.$message({
-                        //         type: 'info',
-                        //         message: `action: ${ action }`
-                        //     });
-                        // }
                     });
                 }
             },

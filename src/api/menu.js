@@ -46,6 +46,8 @@ export const formatRoutes = (routes) => {
           require(['../views/warehouse/' + component + '.vue'], resolve);
         } else if(component.startsWith('Con')){
           require(['../views/construction/' + component + '.vue'], resolve);
+        } else if(component.startsWith('basic')){
+          require(['../views/basicData/' + component + '.vue'], resolve);
         }
       }
     }
