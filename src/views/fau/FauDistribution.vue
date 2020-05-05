@@ -48,7 +48,6 @@
 
     <div style="margin-top: 10px">
       <el-table
-        :key="tableKey"
         v-loading="listLoading"
         :data="faultDate"
         border
@@ -73,11 +72,11 @@
         <!-- 类型！ -->
         <el-table-column label="故障类型" prop="type" min-width="150" align="center">
         </el-table-column>
+        <!-- 具体描述 -->
+        <el-table-column label="详细信息" prop="des" width="150" align="center">
+        </el-table-column>
         <!-- 位置! -->
         <el-table-column label="位置" prop="address" width="300" align="center">
-          <template slot-scope="scope">
-            <span>{{ scope.row.address }}</span>
-          </template>
         </el-table-column>
         <!-- 时限! -->
         <el-table-column label="时限" prop="limitTime" width="110" align="center">
@@ -89,7 +88,7 @@
         <el-table-column label="故障程度" prop="importance" width="80px">
         </el-table-column>
         <!-- 维修人员！ -->
-        <el-table-column label="维修人员" prop="account.name" align="center" width="200">
+        <el-table-column label="维修人员" prop="account.name" align="center" width="100">
           <template slot-scope="{row}">
             <span v-if="row.status !== 'unDistribution'" class="link-type" @click="handleFetchRM(row.account)">{{ row.account.name }}</span>
             <span v-else style="color: red">{{row.status | statusFilter}}</span>
@@ -217,7 +216,7 @@
         <el-table-column label="姓名" prop="name" align="center" min-width="20%">
         </el-table-column>
 
-        <el-table-column label="地址" prop="address" align="center" min-width="45%">
+        <el-table-column label="地址" prop="pole.position" align="center" min-width="45%">
         </el-table-column>
         <!-- 操作! -->
         <el-table-column label="操作" align="center" min-width="15%" class-name="small-padding fixed-width">
@@ -453,9 +452,11 @@
       // 添加完成更新
       addAccount() {
         //之后添加表单验证
-        this.getRequest('/fault/dis/manual?eId=' + this.temp.errorId + '&aId=' + this.temp.aId);
-        this.initFaults();
-        this.initAccountQuery();
+        this.getRequest('/fault/dis/manual?eId=' + this.temp.errorId + '&aId=' + this.temp.aId).then(resp=>{
+          this.initFaults();
+          this.initAccountQuery();
+          this.accountDialogVisible = false;
+        });
       }
     }
   }

@@ -64,16 +64,12 @@
         </el-table-column>
         <!-- 类型！ -->
         <el-table-column label="故障类型" prop="type" min-width="150" align="center">
-          <!--<template slot-scope="{row}">
-            <span v-if="row.status !== 'unDistribution' " class="link-type"">{{ row.type }}</span>
-            <span v-else @click="handleNoWO">{{ row.type }}</span>
-          </template>-->
+        </el-table-column>
+        <!-- 具体描述 -->
+        <el-table-column label="详细信息" prop="des" width="150" align="center">
         </el-table-column>
         <!-- 位置! -->
         <el-table-column label="位置" prop="address" width="300" align="center">
-          <template slot-scope="scope">
-            <span>{{ scope.row.address }}</span>
-          </template>
         </el-table-column>
         <!-- 时限! -->
         <el-table-column label="时限" prop="limitTime" width="110" align="center">
@@ -85,7 +81,7 @@
         <el-table-column label="故障程度" prop="importance" width="80px">
         </el-table-column>
         <!-- 维修人员！ -->
-        <el-table-column label="维修人员" prop="account.name" align="center" width="200">
+        <el-table-column label="维修人员" prop="account.name" align="center" width="100">
           <template slot-scope="{row}">
             <span v-if="row.status !== 'unDistribution'" class="link-type" @click="handleFetchRM(row.account)">{{ row.account.name }}</span>
             <span v-else style="color: red">{{row.status | statusFilter}}</span>

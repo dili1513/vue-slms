@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="activeName" type="card">
-      <el-tab-pane label="角色权限" name="AccAuth"><AccAuth/></el-tab-pane>
+      <el-tab-pane label="用户权限" name="AccAuth"><AccAuth/></el-tab-pane>
       <el-tab-pane label="资源权限" name="RoleAuth"><RoleAuth/></el-tab-pane>
     </el-tabs>
   </div>

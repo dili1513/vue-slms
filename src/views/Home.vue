@@ -1,7 +1,7 @@
 <template>
   <div class="homeBox">
     <el-container >
-      <el-aside width="200px">
+      <el-aside width="200px" style="height: 800px">
         <el-menu unique-opened router>
           <el-menu-item index="/home" >
             <i class="el-icon-s-home"></i>
